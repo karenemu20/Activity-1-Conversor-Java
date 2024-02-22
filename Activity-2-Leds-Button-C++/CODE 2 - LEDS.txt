@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <STM32F7xx.h>
+
+
+int cont=0;
+
+int main(void){
+	//CONFIGURACION DE PINES COMO SALIDA
+	RCC  ->AHB1ENR |= 0x10000002; 	//BUS DE DATOS
+	GPIOB->MODER   |= 0x10004001;   //PTB0, PTB7 y PTB 14 -> OUTPUT
+	GPIOB->OTYPER  |= 0;            //PUSH PULL -> PTB0, PTB7 y PTB 14
+	GPIOB->OSPEEDR |= 0x10004001;   //MEDIUM SPEEED -> PTB0, PTB7 y PTB 14
+	GPIOB->PUPDR   |= 0x10004001;   //PULL-UP -> PTB14, PTB0 y PTB 7
+	
+ 	
+	while(true){        //bucle 
+
+		if(GPIOB->IDR = 1)	{
+			GPIOB->ODR = 0x4001; //LED ROJO PB14 & LED VERDE PB0
+		}
+		if(GPIOC->IDR = 1)	{
+			GPIOC->ODR = 0x4001; //LEDS EXTERNOS
+		}	
+	}//cierra bucle
+	
+}//cierra main
